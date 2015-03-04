@@ -1,0 +1,19 @@
+Typical Workflows
+
+1.	Data matrix generated (data)
+2.	Data converted from proprietary software to open source format accessible to R
+3.	Use R package “mzR” functions peaks() and header() to generate the appropriate data lists (data.p and data.h)
+4.	Use custom function mzUnpack() to create data matrix (data.pR)
+5.	Mean and standard deviation centre the data using apply and function(x) (x-mean(x))/sd(x). (data.pRC)
+6.	Perform principal component analysis or factor analysis on relevant portions of data matrix in order to generate useful data (data.pRC.pca or data.pRC.fa)
+7.	Assign retention times (data.h$ret) of most important factors based on column vectors. Column vectors actually line up with scan number, which corresponds to retention time.
+8.	From the important component scores, select the most important m/z peaks manually using identify() or using a simple cutoff. (data.pRC.sc.mz)
+9.	Use the glycan.gen() function to generate a list of possible glycan masses and monomer compositions (gg1)
+10.	Employ rlookup() to match m/z peaks (data.pRC.sc.mz) from chromatogram to possible glycan structures (gg1[  ,1])—or vice versa. The new matrix could be called data.pRC.sc.gg1.rl.
+11.	Use cbind() to attach the relevant glycan monomer compositions from gg1[  ,2:5] to data.pRC.sc.gg1.rl. This matrix can be named struct.hits.
+12.	Plot important peaks against retention time. You can cbind() the peak m/z values and the retention time if desired. Intensity would also be good.
+13.	Use textxy() in the calibrate package to add appropriate text to the plotted data points. 
+14.	Perform regress.all.matrix() on relevant m/z and retention times. Call it (reg).
+15.	Perform a conditioned abline.batch() on reg or perform abline.per3 on single triplet of points.
+16.	Save the abline condition as a separate matrix if you wish. The y-int and x-int information are all important physical information regarding the chromatography.
+17.	Find ratios of y-int to y-int, and/or ratios of x-int to x-int which turn out to equal specific values (integer values?)
