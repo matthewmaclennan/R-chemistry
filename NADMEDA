@@ -1,38 +1,38 @@
-#generates possible DMEDA-derivatized naphthenic acids structures
+#generates possible molecules containing C, H, N, O and S
 
-NADMEDA<-function(Cmin,Cmax,Z,On,Sn,Nn,massmin,massmax){
+nagenmz<-function(Cmin,Cmax,DBE,On,Sn,Nn,massmin,massmax){
 
 ###Define the input variables: The largest Carbon, Oxygen, Sulfur and Nitrogen numbers, Z number and mass range through which to loop.
 
 Cmin <-as.numeric(Cmin)
 Cmax <- as.numeric(Cmax)
-Z <- as.numeric(Z)
+DBE <- as.numeric(DBE)
 On <- as.numeric(On)
 Sn<-as.numeric(Sn)
 Nn<-as.numeric(Nn)
 massmin <- as.numeric(massmin)
 massmax <- as.numeric(massmax)
 
-###Next define matrix with 9 columns of all zeros. This eases the memory handling.
+###Next define matrix with 7 columns of all zeros. This eases the memory handling.
 
-d<-matrix(c(0,0,0,0,0,0,0,0,0),ncol=9)
+d<-matrix(c(0,0,0,0,0,0,0),ncol=7)
 
 ###Open the nested loop.
 
 for(m in 0:Nn){
 for(l in 0:Sn){
-for(i in 2:On){
-for(j in 2*0:Z){
+for(i in 0:On){
+for(j in 2*0:DBE){
 for(k in Cmin:Cmax){
 #The following rule if(k<abs(j)) states that the number of carbons in a possible
-#naphthenic acid must be more than the Z number. Z number = -2 means there is
+#organic acid must be more than the Z number. Z number = -2 means there is
 #one ring in the structure. It follows that a 2-carbon structure cannot have a
 #ring, but a 3-C structure can have a ring. In the case of this rule being
 #violated, the current loop is null and the next loop begins.
 
 if(k<abs(j) | k>(2*k+j)){is.null(k)} else {
-a<-12*k+2*k+j+16*i+32*l+14*m
-if(a<massmax & a>massmin) d<-rbind(d,c(a+71,a,(a+71-117)%%14,j,k,2*k+j,i,l,m))
+a<-12*k+2*k+2-j+1+m+16*i+15*m+32*l
+if(a<massmax & a>massmin) d<-rbind(d,c(a,-j,k,2*k-j+1+m,i,m,l))
 }
 }
 
@@ -41,7 +41,7 @@ if(a<massmax & a>massmin) d<-rbind(d,c(a+71,a,(a+71-117)%%14,j,k,2*k+j,i,l,m))
 }
 }
 }
-colnames(d)<-c("Deriv. Mass","Mass","14-Remainder","Z-number","C","H","O","S","N")
+colnames(d)<-c("Mass","Z-number","C","H","O","N","S")
 d<-d[-1,]
 
 }
