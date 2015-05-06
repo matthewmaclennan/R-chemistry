@@ -31,7 +31,7 @@ d<-matrix(c(0,0,0,0,0,0,0),ncol=7)
 #violated, the current loop is null and the next loop begins.
 
               if(k<abs(j) | k>(2*k+j)){is.null(k)} else {
-                a<-12*k+2*k+2-j+1+m+16*i+15*m+32*l
+                a<-12*k+2*k+2-j+1+m+16*i+14*m+32*l
                 if(a<massmax & a>massmin) d<-rbind(d,c(a,-j,k,2*k+2-j+1+m,i,m,l))
               }
           }
