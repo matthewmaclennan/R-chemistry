@@ -1,6 +1,6 @@
 #generates possible molecules containing C, H, N, O and S
 
-nagenmz<-function(Cmin,Cmax,DBE,On,Sn,Nn,massmin,massmax){
+nagenmz<-function(Cmin,Cmax,DBE,On,Sn,Nn,massmin,massmax,chargemin,chargemax){
 
 ###Define the input variables: The largest Carbon, Oxygen, Sulfur and Nitrogen numbers, Z number and mass range through which to loop.
 
@@ -12,10 +12,11 @@ Sn<-as.numeric(Sn)
 Nn<-as.numeric(Nn)
 massmin <- as.numeric(massmin)
 massmax <- as.numeric(massmax)
+chargemin <- as.numeric(chargemin)
+chargemax <- as.numeric(chargemax)
+###Next define matrix with 8 columns of all zeros. This eases the memory handling.
 
-###Next define matrix with 7 columns of all zeros. This eases the memory handling.
-
-d<-matrix(c(0,0,0,0,0,0,0),ncol=7)
+d<-matrix(c(0,0,0,0,0,0,0,0),ncol=8)
 
 ###Open the nested loop.
 
@@ -24,21 +25,22 @@ d<-matrix(c(0,0,0,0,0,0,0),ncol=7)
       for(i in 0:On){
         for(j in 2*0:DBE){
           for(k in Cmin:Cmax){
-#The following rule if(k<abs(j)) states that the number of carbons in a possible
+#The following rule if((k+m+i+l)<abs(j)) states that the total number of carbons+oxygens+nitrogens+sulfur in a possible
 #naphthenic acid must be more than the Z number. Z number = -2 means there is
 #one ring in the structure. It follows that a 2-carbon structure cannot have a
 #ring, but a 3-C structure can have a ring. In the case of this rule being
 #violated, the current loop is null and the next loop begins.
 
-              if(k<abs(j) | k>(2*k+j)){is.null(k)} else {
-                a<-12*k+2*k+2-j+1+m+16*i+14*m+32*l
-                if(a<massmax & a>massmin) d<-rbind(d,c(a,-j,k,2*k+2-j+1+m,i,m,l))
+              if((k+m+i+l)<abs(j) | (k+m+i+l)>(2*(k+m+i+l)+j)){is.null(k)} else {
+                charge<-seq(chargemin,chargemax,1)
+                a<-12*k+2*k+2-j+charge+m+16*i+14*m+32*l
+                if(a<massmax & a>massmin) d<-rbind(d,cbind(a,-j,k,2*k+2-j+charge+m,i,m,l,charge))
               }
           }
         }
       }
     }
   }
-  colnames(d)<-c("Mass","Z-number","C","H","O","N","S")
+  colnames(d)<-c("Mass","Z-number","C","H","O","N","S","Charge")
   d<-d[-1,]
 }
