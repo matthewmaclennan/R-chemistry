@@ -35,7 +35,7 @@ d<-matrix(c(0,0,0,0,0,0,0,0,0),ncol=9)
                 charge<-seq(chargemin,chargemax,1)
                 a<-12*k+2*k+2-j+charge+m+16*i+14*m+32*l
                 if(a<massmax & a>massmin) d<-rbind(d,cbind(cbind(a,-j,k,2*k+2-j+charge+m,i,m,l,charge),
-                cbind(a/cbind(a,-j,k,2*k+2-j+charge+m,i,m,l,charge)[,8]))
+                a/cbind(a,-j,k,2*k+2-j+charge+m,i,m,l,charge)[,8]))
               }
           }
         }
