@@ -1,0 +1,5 @@
+#mz is the vector of m/z values for a certain m/z cutoff
+#rt is the vector of migration times associated with the m/z values in "mz"
+pairs<-cbind(as.numeric(mz),as.numeric(rt))
+#Find unique m/z values which are rounded in order that they can be matched to the nagenmz values
+mz.u<-unique(round(mz))
