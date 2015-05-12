@@ -9,7 +9,9 @@ hitlist<-lapply(unique(round(mz)),function(x) naC30O2N3Z32[which(round(naC30O2N3
 mzhitEDC<-unlist(lapply(hitlist,function(x) unique(x[which(x[,"N"]==3 & x[,"O"]==2 & x[,"Charge"]==1),"m/z"])))
 #match the unique mz values from mzhitEDC to the large mz values list in "pairs"
 mzhitEDC.t<-lapply(mzhitEDC,function(x) ampz.mz.rt.1e6[which(round(ampz.mz.rt.1e6[,1])==x),])
+require(plyr)
 plot(ldply(mzhitEDC.t,function(x) rbind(x))[,1]~ldply(mzhitEDC.t,function(x) rbind(x))[,2],cex=0.2)
 #Use points(...) to add more data in a different colour.
 #For a function, then, the input would include the data, the cutoff, the formula restrictions, the plot parameters
 #The result would be plot with coloured points based on the likely molecular formulae 
+#
