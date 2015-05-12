@@ -4,4 +4,6 @@ pairs<-cbind(as.numeric(mz),as.numeric(rt))
 #Find unique m/z values which are rounded in order that they can be matched to the nagenmz values
 mz.u<-unique(round(mz))
 #The lapply() below matches unique mz values to rounded m/z values in the nagenmz set already generated (generate your own)
-lapply(unique(round(mz)),function(x) naC30O2N3Z32[which(round(naC30O2N3Z32[,9],0)==x,arr.in=T),])
+hitlist<-lapply(unique(round(mz)),function(x) naC30O2N3Z32[which(round(naC30O2N3Z32[,9],0)==x,arr.in=T),])
+#Which of the hitlist formulae contains 3N, 2O, Charge=1. Return the m/z column and filter by unique (unlist).
+unlist(lapply(hitlist,function(x) unique(x[which(x[,"N"]==3 & x[,"O"]==2 & x[,"Charge"]==1),"m/z"])))
