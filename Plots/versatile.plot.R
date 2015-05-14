@@ -4,7 +4,7 @@
 #The viewing window can be adjusted (data.window)
 #
 #
-versatile.plot<-function(data,data.window,thresh,ret,cex,xlim=NULL,ylim=NULL,xlab,ylab,colour){
+versatile.plot<-function(data,data.window,thresh,ret,cex,xlim=NULL,ylim=NULL,xlab="",ylab="",colour){
   ifelse(colour=="topo",
     plot(data[which(data.window>thresh,arr.in=T)[,1]]~ret[which(data.window>thresh,arr.in=T)[,2]],
     cex=cex,xlab=xlab,ylab=ylab,
