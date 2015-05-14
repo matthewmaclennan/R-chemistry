@@ -5,6 +5,8 @@ pairs<-cbind(as.numeric(mz),as.numeric(rt))
 mz.u<-unique(round(mz))
 #The lapply() below matches unique mz values to rounded m/z values in the nagenmz set already generated (generate your own)
 hitlist<-lapply(unique(round(mz)),function(x) naC30O2N3Z32[which(round(naC30O2N3Z32[,9],0)==x,arr.in=T),])
+#or
+lapply(mzu,function(x) naEDC[naEDC[,"m/z"]==x,])
 #Which of the hitlist formulae contains 3N, 2O, Charge=1. Return the m/z column and filter by unique (unlist).
 mzhitEDC<-unique(unlist(lapply(hitlist,function(x) x[which(x[,"N"]==3 & x[,"O"]==2 & x[,"Charge"]==1),"m/z"])))
 #match the unique mz values from mzhitEDC to the large mz values list in "pairs"
