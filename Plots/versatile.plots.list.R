@@ -1,6 +1,6 @@
 #Versatile.plots code where "data" is a list object
 #
-versatile.plot.list<-function(data,data.window,thresh,ret,cex,xlim=NULL,ylim=NULL,xlab="",ylab="",colour){
+versatile.plot.list<-function(data,thresh,ret,cex,xlim=NULL,ylim=NULL,xlab="",ylab="",colour){
   ifelse(colour=="topo",
     plot(unlist(lapply(data,function(x) x[x[,2]>thresh,1]))~unlist(lapply(data,function(x) x[x[,2]>thresh,3])),
     cex=cex,xlab=xlab,ylab=ylab,
