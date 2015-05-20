@@ -2,11 +2,11 @@
 #
 versatile.plot.list<-function(data,data.window,thresh,ret,cex,xlim=NULL,ylim=NULL,xlab="",ylab="",colour){
   ifelse(colour=="topo",
-    plot(lapply(data,function(x) x[x[,2]>thresh,])~ret[which(data.window>thresh,arr.in=T)[,2]],
+    plot(unlist(lapply(data,function(x) x[x[,2]>thresh,1]))~unlist(lapply(data,function(x) x[x[,2]>thresh,3]))),
     cex=cex,xlab=xlab,ylab=ylab,
-    col=topo.colors(length(data[which(data.window>thresh,arr.in=T)]))[rank(data[which(data.window>thresh,arr.in=T)])],
+    col=topo.colors(length(unlist(lapply(data,function(x) x[x[,2]>thresh,1])))[rank(unlist(lapply(data,function(x) x[x[,2]>thresh,1]))],
     xlim=xlim, ylim=ylim),
-    plot(data[which(data.window>thresh,arr.in=T)[,1]]~ret[which(data.window>thresh,arr.in=T)[,2]],
+    plot(unlist(lapply(data,function(x) x[x[,2]>thresh,1]))~unlist(lapply(data,function(x) x[x[,2]>thresh,3]))),
     cex=cex,xlab=xlab,ylab=ylab,
     col=colour,
     xlim=xlim,
