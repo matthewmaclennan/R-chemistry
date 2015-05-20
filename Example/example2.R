@@ -2,11 +2,11 @@
 #cutoff is the data cutoff to consider
 #nagenmz is a list of usually unique m/z values from the nagenmz function, generated for this purpose.
 connector<-function(nagenmz,mzintrt,cutoff){
-as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>cutoff,]),as.data.frame))[round(as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>6e4,]),
+as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>cutoff,]),as.data.frame))[round(as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>cutoff,]),
 as.data.frame))[,1],0) %in% nagenmz,]
 }
 #For the same function, but using lists as inputs
 connector<-function(nagenmz,mzintrt,cutoff){
-as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>cutoff,]),as.data.frame))[round(as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>6e4,]),
+as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>cutoff,]),as.data.frame))[round(as.matrix(ldply(lapply(mzintrt,function(x) x[x[,2]>cutoff,]),
 as.data.frame))[,1],0) %in% nagenmz,]
 }
