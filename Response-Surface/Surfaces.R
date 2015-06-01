@@ -14,3 +14,5 @@ swathz.poly<-lm(swathzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwid
 migz.poly<-lm(migzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
 currentz.poly<-lm(currentzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
 atimez.poly<-lm(atimezlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
+#Alternatively, one can create
+pwidthlmw<-cbind(pwidthlm[,-3],apply(pwidthlm[,-3],1,function(x) 100-sum(x)),pwidthlm[,3])
