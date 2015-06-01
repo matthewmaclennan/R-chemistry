@@ -4,4 +4,7 @@ percent2pH<-function(acidperc, acid_density,acid_molarmass, acidKa,waterperc){
   ICEtable<-matrix(c(acid_init_molarity*acidKa,-acidKa,-1),ncol=1)
   roots<-polyroot(ICEtable)
   final<-as.numeric(roots)
+  print(roots)
+  print(final)
+  final
 }
