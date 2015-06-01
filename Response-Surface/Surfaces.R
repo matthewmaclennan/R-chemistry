@@ -14,8 +14,25 @@ swathz.poly<-lm(swathzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwid
 migz.poly<-lm(migzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
 currentz.poly<-lm(currentzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
 atimez.poly<-lm(atimezlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
+#
+#
 #Add in the columns for % water and approximate pH. Function percent2pH() is available as *.R file also at
 #www.github.com/matthewmaclennan/R-chemistry/Response-Surface/percent2pH.R
 pwidthlmw<-cbind(pwidthlm[,-3],apply(pwidthlm[,-3],1,function(x) 100-sum(x)),
 -logb(t(apply(pwidthlmw,1,function(x) percent2pH(x[2],1.22,46,1.77e-4,x[3])))[,1],10),
 pwidthlm[,3])
+#
+#
+#
+swathzlmw<-cbind(swathzlm[,-3],apply(swathzlm[,-3],1,function(x) 100-sum(x)),
+-logb(t(apply(swathzlm,1,function(x) percent2pH(x[2],1.22,46,1.77e-4,x[3])))[,1],10),
+swathzlm[,3])
+migzlmw<-cbind(migzlm[,-3],apply(migzlm[,-3],1,function(x) 100-sum(x)),
+-logb(t(apply(migzlm,1,function(x) percent2pH(x[2],1.22,46,1.77e-4,x[3])))[,1],10),
+migzlm[,3])
+currentzlmw<-cbind(currentzlm[,-3],apply(currentzlm[,-3],1,function(x) 100-sum(x)),
+-logb(t(apply(currentzlm,1,function(x) percent2pH(x[2],1.22,46,1.77e-4,x[3])))[,1],10),
+currentzlm[,3])
+atimezlmw<-cbind(atimezlm[,-3],apply(atimezlm[,-3],1,function(x) 100-sum(x)),
+-logb(t(apply(atimezlm,1,function(x) percent2pH(x[2],1.22,46,1.77e-4,x[3])))[,1],10),
+atimezlm[,3])
