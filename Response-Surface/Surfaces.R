@@ -6,5 +6,11 @@ pwidthlm<-cbind(c(0,10,30,50,70),c(rep(0.5,5),rep(2,5),rep(3.5,5)),c(pwidth))
 swathzlm<-cbind(c(0,10,30,50,70),c(rep(0.5,5),rep(2,5),rep(3.5,5)),c(swathz))
 migzlm<-cbind(c(0,10,30,50,70),c(rep(0.5,5),rep(2,5),rep(3.5,5)),c(migz))
 currentzlm<-cbind(c(0,10,30,50,70),c(rep(0.5,5),rep(2,5),rep(3.5,5)),c(currentz))
-atimelm<-cbind(c(0,10,30,50,70),c(rep(0.5,5),rep(2,5),rep(3.5,5)),c(atime))
-#Perform polynomial regression(s) on these
+atimezlm<-cbind(c(0,10,30,50,70),c(rep(0.5,5),rep(2,5),rep(3.5,5)),c(atimez))
+#Perform polynomial regression(s) on these. Since columns 1 and 2 of pwidthlm are identical to columns 1 and 2 of the others, 
+#we'll just use the same columns for all regressions.
+pwidth.poly<-lm(pwidthlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
+swathz.poly<-lm(swathzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
+migz.poly<-lm(migzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
+currentz.poly<-lm(currentzlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
+atimez.poly<-lm(atimezlm[,3]~I(pwidthlm[,1])+I(pwidthlm[,2])+I(pwidthlm[,1]*pwidthlm[,2])+I((pwidthlm[,1])^2)+I((pwidthlm[,2])^2))
