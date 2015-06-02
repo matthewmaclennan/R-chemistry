@@ -16,5 +16,6 @@ versatile.plot<-function(data,data.window,thresh,ret,cex,xlim=NULL,ylim=NULL,xla
     xlim=xlim,
     ylim=ylim)
     )
+  t<-topo.colors(length(data[which(data.window>thresh,arr.in=T)]))[rank(data[which(data.window>thresh,arr.in=T)])]
 }
 #eoc
