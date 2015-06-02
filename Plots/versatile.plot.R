@@ -4,18 +4,20 @@
 #The viewing window can be adjusted (data.window)
 #
 #
-versatile.plot<-function(data,data.window,thresh,ret,cex,xlim=NULL,ylim=NULL,xlab="",ylab="",colour,pch=""){
-  ifelse(colour=="topo",
+versatile.plot<-function(data,data.window,thresh,ret,cex,xlim=NULL,ylim=NULL,xlab="",ylab="",rampPalette,col,pch=""){
+  ifelse(col=="ramp",
     plot(data[which(data.window>thresh,arr.in=T)[,1]]~ret[which(data.window>thresh,arr.in=T)[,2]],
     cex=cex,xlab=xlab,ylab=ylab,pch=pch,
-    col=topo.colors(length(data[which(data.window>thresh,arr.in=T)]))[rank(data[which(data.window>thresh,arr.in=T)])],
+    col=rampPalette(length(data[which(data.window>thresh,arr.in=T)]))[rank(data[which(data.window>thresh,arr.in=T)])],
     xlim=xlim, ylim=ylim),
     plot(data[which(data.window>thresh,arr.in=T)[,1]]~ret[which(data.window>thresh,arr.in=T)[,2]],
     cex=cex,xlab=xlab,ylab=ylab,
-    col=colour,pch=pch,
+    col=col,pch=pch,
     xlim=xlim,
     ylim=ylim)
     )
-  t<-topo.colors(length(data[which(data.window>thresh,arr.in=T)]))[rank(data[which(data.window>thresh,arr.in=T)])]
+  
 }
 #eoc
+
+#image.plot(legend.only=T,zlim=range(mpzA11[140:220,450:580]),col=topo.colors(5000))
